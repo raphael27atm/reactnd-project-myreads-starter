@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types'
 class Book extends Component {
-  
+  static propTypes = {
+    book: PropTypes.object.isRequired,
+    handleBooks: PropTypes.func.isRequired,
+  }
+
   handleChange = (e, book) => {
     this.props.handleBooks(book, e.target.value)
   }
@@ -16,7 +20,7 @@ class Book extends Component {
         <div className="book-top">
           <div 
             className="book-cover" 
-            style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}
+            style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks !== undefined ? book.imageLinks.thumbnail: ''})` }}
           ></div>
           <div className="book-shelf-changer">
             <select value={book.shelf} onChange={(e) => this.handleChange(e, book)}>
