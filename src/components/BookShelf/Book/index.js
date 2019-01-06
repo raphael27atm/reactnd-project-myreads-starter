@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types'
-class Book extends Component {
+class Book extends PureComponent {
   static propTypes = {
     book: PropTypes.object.isRequired,
     handleBooks: PropTypes.func.isRequired,
@@ -23,7 +23,7 @@ class Book extends Component {
             style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks !== undefined ? book.imageLinks.thumbnail: ''})` }}
           ></div>
           <div className="book-shelf-changer">
-            <select value={book.shelf} onChange={(e) => this.handleChange(e, book)}>
+            <select value={book.shelf !== undefined ? book.shelf : 'none'  } onChange={(e) => this.handleChange(e, book)}>
               <option value="move" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
